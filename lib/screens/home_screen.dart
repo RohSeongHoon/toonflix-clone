@@ -30,10 +30,13 @@ class _HomeScreenState extends State<HomeScreen> {
         future: webtoons,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return ListView(
-              children: [
-                for (var data in snapshot.data!) Text(data.title),
-              ],
+            return ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                var webtoon = snapshot.data![index];
+                return Text(webtoon.title);
+              },
             );
           }
           return const Center(
