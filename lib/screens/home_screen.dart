@@ -10,7 +10,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Future<List<WebtoonModel>> webtoons = ApiService.getTodaysToons();
+  final Future<List<WebtoonModel>> webtoons = ApiService.getTodaysToons();
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +30,15 @@ class _HomeScreenState extends State<HomeScreen> {
         future: webtoons,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return const Text('has data');
+            return ListView(
+              children: [
+                for (var data in snapshot.data!) Text(data.title),
+              ],
+            );
           }
-          return const Text('Loading...');
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         },
       ),
     );
