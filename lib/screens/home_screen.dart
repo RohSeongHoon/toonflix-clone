@@ -36,7 +36,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(
                   height: 50,
                 ),
-                Expanded(child: makeList(snapshot)),
+                Expanded(
+                  child: makeList(snapshot),
+                ),
               ],
             );
           }
